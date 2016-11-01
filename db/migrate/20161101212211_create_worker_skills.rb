@@ -4,6 +4,8 @@ class CreateWorkerSkills < ActiveRecord::Migration[5.0]
       t.string :proficiency
       t.references :worker, foreign_key: true
       t.references :skill, foreign_key: true
+
+      t.timestamps
     end
   end
 end
