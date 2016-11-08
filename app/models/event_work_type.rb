@@ -1,2 +1,2 @@
-class EventWorkType < ApplicationRecord
-end
+# class EventWorkType < ApplicationRecord
+# end
