@@ -42,7 +42,8 @@ end
     last_name: this_ln,
     email: Faker::Internet.free_email(this_fn),
     phone: Faker::PhoneNumber.phone_number,
-    user_role_id: 2
+    user_role_id: 2,
+    password: "password"
     )
 
 end
