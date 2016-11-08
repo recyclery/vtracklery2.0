@@ -1,0 +1,2 @@
+class AvailabilitySchedule < ApplicationRecord
+end

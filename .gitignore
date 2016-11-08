@@ -8,6 +8,8 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
+*.DS_Store
+.ruby-version
 /log/*
 /tmp/*
 !/log/.keep
