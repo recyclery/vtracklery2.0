@@ -16,8 +16,10 @@ ActiveRecord::Schema.define(version: 20161101213611) do
   enable_extension "plpgsql"
 
   create_table "event_work_types", force: :cascade do |t|
-    t.integer "event_id"
-    t.integer "work_type_id"
+    t.integer  "event_id"
+    t.integer  "work_type_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["event_id"], name: "index_event_work_types_on_event_id", using: :btree
     t.index ["work_type_id"], name: "index_event_work_types_on_work_type_id", using: :btree
   end
@@ -32,7 +34,9 @@ ActiveRecord::Schema.define(version: 20161101213611) do
   end
 
   create_table "skills", force: :cascade do |t|
-    t.string "name"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -47,6 +51,8 @@ ActiveRecord::Schema.define(version: 20161101213611) do
     t.integer  "work_type_id"
     t.datetime "work_start"
     t.datetime "work_end"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["event_id"], name: "index_work_times_on_event_id", using: :btree
     t.index ["work_type_id"], name: "index_work_times_on_work_type_id", using: :btree
     t.index ["worker_id"], name: "index_work_times_on_worker_id", using: :btree
@@ -59,9 +65,11 @@ ActiveRecord::Schema.define(version: 20161101213611) do
   end
 
   create_table "worker_skills", force: :cascade do |t|
-    t.string  "proficiency"
-    t.integer "worker_id"
-    t.integer "skill_id"
+    t.string   "proficiency"
+    t.integer  "worker_id"
+    t.integer  "skill_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["skill_id"], name: "index_worker_skills_on_skill_id", using: :btree
     t.index ["worker_id"], name: "index_worker_skills_on_worker_id", using: :btree
   end
@@ -72,10 +80,10 @@ ActiveRecord::Schema.define(version: 20161101213611) do
     t.string   "last_name"
     t.string   "email"
     t.string   "phone"
-    t.integer  "user_type_id"
+    t.integer  "user_role_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["user_type_id"], name: "index_workers_on_user_type_id", using: :btree
+    t.index ["user_role_id"], name: "index_workers_on_user_role_id", using: :btree
   end
 
   add_foreign_key "event_work_types", "events"
@@ -85,4 +93,5 @@ ActiveRecord::Schema.define(version: 20161101213611) do
   add_foreign_key "work_times", "workers"
   add_foreign_key "worker_skills", "skills"
   add_foreign_key "worker_skills", "workers"
+  add_foreign_key "workers", "user_roles"
 end

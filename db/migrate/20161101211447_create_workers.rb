@@ -6,7 +6,7 @@ class CreateWorkers < ActiveRecord::Migration[5.0]
       t.string :last_name
       t.string :email
       t.string :phone
-      t.references :user_type, foreign_key: true
+      t.references :user_role, foreign_key: true
 
       t.timestamps
     end
