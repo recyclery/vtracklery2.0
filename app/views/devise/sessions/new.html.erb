@@ -24,3 +24,9 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<p>Recent users:</p>
+
+<% @workers.each do |worker| %>
+  <%= worker.username %><br>
+<% end %>

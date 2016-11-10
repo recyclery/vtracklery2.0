@@ -1,0 +1,34 @@
+<% if !current_worker %>
+  Please log in.
+<% else %>
+  <h1><%= "Welcome, #{current_worker.first_name}!" %></h1>
+
+  <p>Log your hours:</p>
+
+  <% if @unclosed_shift %>
+    <p>There is an unclosed_shift</p>
+    <button>
+    End shift
+    </button>
+  <% else %>
+    <button>
+      Start shift
+    </button>
+  <% end %>
+
+
+
+  <h1>Your skills:</h1>
+
+  <% current_worker.worker_skills.each do |worker_skill| %>
+    <%= worker_skill.skill.name %>
+    <% worker_skill.proficiency.times do %>
+    *
+    <% end %>
+    <br>
+  <% end %>
+
+
+
+
+<% end %>
