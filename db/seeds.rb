@@ -43,7 +43,7 @@ Worker.create!(
   password: "password"
   )
 
-Worker.create!(
+rob = Worker.create!(
   username: "rob.dale",
   first_name: "Rob",
   last_name: "Dale",
@@ -146,12 +146,40 @@ WorkTime.create(
     work_start: Time.now
     )
 
-# availability
 
 # skills
+Skill.create(name: "name bike")
+Skill.create(name: "fix flat")
+Skill.create(name: "replace tire")
+Skill.create(name: "replace seat")
+Skill.create(name: "replace cables")
+Skill.create(name: "adjust brakes")
+Skill.create(name: "adjust derailleurs")
+Skill.create(name: "replace brakes")
+Skill.create(name: "replace shifters")
+Skill.create(name: "remove pedals")
+Skill.create(name: "replace crank")
+Skill.create(name: "adjust bearing")
+Skill.create(name: "overhaul hubs")
+Skill.create(name: "overhaul bracket")
+Skill.create(name: "overhaul headset")
+Skill.create(name: "true wheels")
+Skill.create(name: "replace fork")
+Skill.create(name: "drive stick")
+
+
+
 
 # worker skills
 
+Skill.all.each do |skill|
+  WorkerSkill.create(proficiency: rand(0..5), worker_id: rob.id, skill_id: skill.id)
+end
 
+
+
+
+
+# availability
 
 # event work types

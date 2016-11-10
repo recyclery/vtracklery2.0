@@ -18,4 +18,17 @@
 
 
 
+  <h1>Your skills:</h1>
+
+  <% current_worker.worker_skills.each do |worker_skill| %>
+    <%= worker_skill.skill.name %>
+    <% worker_skill.proficiency.times do %>
+    *
+    <% end %>
+    <br>
+  <% end %>
+
+
+
+
 <% end %>
