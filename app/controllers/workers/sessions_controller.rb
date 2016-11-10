@@ -3,6 +3,7 @@ class Workers::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
+    @workers = Worker.all
     super
   end
 
