@@ -31,13 +31,46 @@ end
 
 # workers
 
+
+
+Worker.create!(
+  username: "ben.vansickle",
+  first_name: "Ben",
+  last_name: "Van Sickle",
+  email: "benjamin.m.vansickle@gmail.com ",
+  phone: "3121234567",
+  user_role_id: 1,
+  password: "password"
+  )
+
+rob = Worker.create!(
+  username: "rob.dale",
+  first_name: "Rob",
+  last_name: "Dale",
+  email: "robzd1@gmail.com ",
+  phone: "3121234567",
+  user_role_id: 1,
+  password: "password"
+  )
+
+Worker.create!(
+  username: "melanie.mazanec",
+  first_name: "Melanie",
+  last_name: "Mazanec",
+  email: "melanie.mazanec@gmail.com",
+  phone: "3121234567",
+  user_role_id: 1,
+  password: "password"
+  )
+
+
 20.times do
 
   this_fn = Faker::Name.first_name
   this_ln = Faker::Name.last_name
 
   Worker.create!(
-    username: "#{this_fn}.#{this_ln}",
+    username: "#{this_fn.downcase}.#{this_ln.downcase}",
     first_name: this_fn,
     last_name: this_ln,
     email: Faker::Internet.free_email(this_fn),
@@ -106,12 +139,47 @@ end
 end
 
 
-# availability
+WorkTime.create(
+    worker_id: rob.id,
+    event_id: Event.all.sample.id,
+    work_type_id: WorkType.all.sample.id,
+    work_start: Time.now
+    )
+
 
 # skills
+Skill.create(name: "name bike")
+Skill.create(name: "fix flat")
+Skill.create(name: "replace tire")
+Skill.create(name: "replace seat")
+Skill.create(name: "replace cables")
+Skill.create(name: "adjust brakes")
+Skill.create(name: "adjust derailleurs")
+Skill.create(name: "replace brakes")
+Skill.create(name: "replace shifters")
+Skill.create(name: "remove pedals")
+Skill.create(name: "replace crank")
+Skill.create(name: "adjust bearing")
+Skill.create(name: "overhaul hubs")
+Skill.create(name: "overhaul bracket")
+Skill.create(name: "overhaul headset")
+Skill.create(name: "true wheels")
+Skill.create(name: "replace fork")
+Skill.create(name: "drive stick")
+
+
+
 
 # worker skills
 
+Skill.all.each do |skill|
+  WorkerSkill.create(proficiency: rand(0..5), worker_id: rob.id, skill_id: skill.id)
+end
 
+
+
+
+
+# availability
 
 # event work types
