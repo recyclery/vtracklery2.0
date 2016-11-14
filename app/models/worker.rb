@@ -9,4 +9,13 @@ class Worker < ApplicationRecord
   has_many :worker_skills
   has_many :skills, through: :worker_skills
   belongs_to :user_role
+
+  def unclosed_shift
+    if !self.work_times.last.work_end
+      return true
+    else
+      return false
+    end
+  end
+
 end

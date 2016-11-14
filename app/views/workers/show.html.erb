@@ -5,15 +5,11 @@
 
   <p>Log your hours:</p>
 
-  <% if @unclosed_shift %>
+  <% if current_worker.unclosed_shift %>
     <p>There is an unclosed_shift</p>
-    <button>
-    End shift
-    </button>
+    <%= button_to "End Shift", root_path %>
   <% else %>
-    <button>
-      Start shift
-    </button>
+    <%= button_to "Start Shift", create_work_time_path(id: current_worker.id) %>
   <% end %>
 
 
