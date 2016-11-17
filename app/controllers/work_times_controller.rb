@@ -13,6 +13,10 @@ class WorkTimesController < ApplicationController
   end
 
   def update
+    work_time = WorkTime.find_by(id: params[:work_time_id])
+    work_time.work_end = Time.now
+    work_time.save
+    redirect_to "/"
   end
 
 
