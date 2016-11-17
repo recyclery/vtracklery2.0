@@ -8,5 +8,9 @@ Rails.application.routes.draw do
     root 'workers#show'
   end
 
+  post "workers/:id/work_times" => "work_times#create", as: "create_work_time"
+
+  post "workers/:worker_id/work_times/:work_time_id" => "work_times#update", as: "update_work_time"
+
 
 end
