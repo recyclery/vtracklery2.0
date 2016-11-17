@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+
+body{
+  text-align: center;
+}
+
+.timecard{
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.timecard tr th{
+  text-align: center;
+}

@@ -6,15 +6,13 @@
   <p>Log your hours:</p>
 
   <% if current_worker.unclosed_shift %>
-    <p>There is an unclosed_shift</p>
+    <p>There is an unclosed shift.  Please clock out.</p>
     <%= button_to "End Shift", update_work_time_path(worker_id: current_worker.id, work_time_id: current_worker.work_times.last.id) %>
   <% else %>
     <%= button_to "Start Shift", create_work_time_path(id: current_worker.id) %>
   <% end %>
 
-
-
-  <h1>Your skills:</h1>
+  <h2>Your skills:</h2>
 
   <% current_worker.worker_skills.each do |worker_skill| %>
     <%= worker_skill.skill.name %>
@@ -23,6 +21,28 @@
     <% end %>
     <br>
   <% end %>
+
+  <h2>Your recent time card activity:</h2>
+  <table class = "timecard">
+    <tr>
+      <th>Start</th>
+      <th>End</th>
+    </tr>
+    <% current_worker.work_times.reverse.each do |work_time| %>
+      <tr>
+        <td>
+          <%= work_time.work_start.to_date %>
+          <%= work_time.work_start.strftime("at %I:%M%p") %>
+        </td>
+        <%if work_time.work_end%>
+          <td>
+            <%= work_time.work_end.to_date %>
+            <%= work_time.work_start.strftime("at %I:%M%p") %>
+          </td>
+        <%end%>
+      </tr>
+    <% end %>
+  </table>
 
 
 
