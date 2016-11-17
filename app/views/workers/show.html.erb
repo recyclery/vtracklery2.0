@@ -25,6 +25,7 @@
   <h2>Your recent time card activity:</h2>
   <table class = "timecard">
     <tr>
+      <th>Date</th>
       <th>Start</th>
       <th>End</th>
     </tr>
@@ -32,12 +33,13 @@
       <tr>
         <td>
           <%= work_time.work_start.to_date %>
-          <%= work_time.work_start.strftime("at %I:%M%p") %>
+        </td>
+        <td class = "work-start">
+          <%= work_time.work_start.strftime("%I:%M %p") %>
         </td>
         <%if work_time.work_end%>
-          <td>
-            <%= work_time.work_end.to_date %>
-            <%= work_time.work_start.strftime("at %I:%M%p") %>
+          <td class = "work-end">
+            <%= work_time.work_start.strftime("%I:%M %p") %>
           </td>
         <%end%>
       </tr>
