@@ -13,6 +13,12 @@ class WorkTimesController < ApplicationController
   end
 
   def update
+    # update this to actually change the relevant work time
+    puts "in the update method"
+    p params
+  end
+
+  def end_shift
     work_time = WorkTime.find_by(id: params[:work_time_id])
     work_time.work_end = Time.now
     work_time.save

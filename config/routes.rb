@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   post "workers/:id/work_times" => "work_times#create", as: "create_work_time"
 
-  post "workers/:worker_id/work_times/:work_time_id" => "work_times#update", as: "update_work_time"
+  post "workers/:worker_id/work_times/:work_time_id" => "work_times#end_shift", as: "end_work_time"
 
+  patch "work_times/:id" => "work_times#update"
 
 end
