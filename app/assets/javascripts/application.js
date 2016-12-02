@@ -57,6 +57,8 @@ $( document ).ready(function(){
 
 
   $("td").on("click", ".save_button", function(){
+    var $permathis = $(this);
+
     var workDate = $("td").children(".save_button").first().parent().siblings(".work-date").children("input").val()
     var workStart = $("td").children(".save_button").first().parent().siblings(".work-start").children("input").val()
     var workEnd = $("td").children(".save_button").first().parent().siblings(".work-end").children("input").val()
@@ -66,7 +68,7 @@ $( document ).ready(function(){
     console.log("saving work-time number " + workTimeID + " with " + workDate + ", " + workStart + ", " + workEnd);
 
     revisedStart = workDate + " " + workStart
-    revisedEnd = workDate + " " + workEnd
+    revisedEnd = workDate + " " + workEnd //update this to consider times that extend into the next day
 
     data = {start: revisedStart, end: revisedEnd, id: workTimeID}
 
@@ -75,14 +77,32 @@ $( document ).ready(function(){
         method: "patch",
         data: data
       }).done(function(response){
-        // update this to hit the server for this data
 
-        // $("td").children(".save_button").first().parent().siblings(".work-date").html(workDate)
-        // $("td").children(".save_button").first().parent().siblings(".work-start").html(workStart)
-        // $("td").children(".save_button").first().parent().siblings(".work-end").html(workEnd)
+        $.ajax({
+        url: "/work_times/" + workTimeID,
+        method: "get"
+        }).done(function(worktimeresponse){ // parse the server data and put it in the fields
+
+            serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
+            serverWorkStart = worktimeresponse["work_start"].substr(11, 8);
+            serverWorkEnd = worktimeresponse["work_end"].substr(11, 8);
+
+            $("td").children(".save_button").first().parent().siblings(".work-date").html(serverWorkDate);
+            $("td").children(".save_button").first().parent().siblings(".work-start").html(serverWorkStart);
+            $("td").children(".save_button").first().parent().siblings(".work-end").html(serverWorkEnd);
+
+            $("td").children(".save_button").parent().html("<button class='edit_button'>edit</button>");
+        })
+
       })
 
-    $(this).parent().html("<button class='edit_button'>edit</button>");
+    // console.log("Entering new data the cheap way, not from the server");
+
+    // $("td").children(".save_button").first().parent().siblings(".work-date").html(workDate);
+    // $("td").children(".save_button").first().parent().siblings(".work-start").html(workStart);
+    // $("td").children(".save_button").first().parent().siblings(".work-end").html(workEnd);
+
+
   });
 
 
