@@ -1,5 +1,15 @@
 <h2>Log in</h2>
 
+<% if alert %>
+  <div id="notice_wrapper">
+    <p class="alert"><%= alert.downcase.capitalize %></p>
+    <!-- downcase and capitalize because of error with devise grammar -->
+  </div>
+<% elsif notice %>
+  <div id="notice_wrapper">
+    <p class="notice"><%= notice.downcase.capitalize %></p>
+  </div>
+<% end %>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
