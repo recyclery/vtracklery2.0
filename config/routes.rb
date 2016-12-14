@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
   patch "work_times/:id" => "work_times#update"
 
+  get "work_times/:id" => "work_times#show"
+
+
 end
