@@ -4,7 +4,6 @@ class WorkTimesController < ApplicationController
     # change this to strong params
     new_work_time = WorkTime.new(worker_id: current_worker.id, work_start: Time.now, event_id: 1, work_type_id: 1)
     if new_work_time.save!
-      p new_work_time.id
       redirect_to "/"
     else
       @errors = new_work_time.errors.full_messages
