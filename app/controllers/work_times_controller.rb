@@ -13,10 +13,28 @@ class WorkTimesController < ApplicationController
   end
 
   def update
+    worktime = WorkTime.find(params[:id])
+
+    worktime.update(
+      work_start: params[:start],
+      work_end: params[:end]
+      )
+  end
+
+  def end_shift
     work_time = WorkTime.find_by(id: params[:work_time_id])
     work_time.work_end = Time.now
     work_time.save
     redirect_to "/"
+  end
+
+
+  def show
+    @worktime = WorkTime.find(params[:id])
+
+    if request.xhr?
+      render json: @worktime
+    end
   end
 
 

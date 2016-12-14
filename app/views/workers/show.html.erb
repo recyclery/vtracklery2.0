@@ -7,7 +7,7 @@
 
   <% if current_worker.unclosed_shift %>
     <p>There is an unclosed shift.  Please clock out.</p>
-    <%= button_to "End Shift", update_work_time_path(worker_id: current_worker.id, work_time_id: current_worker.work_times.last.id) %>
+    <%= button_to "End Shift", end_work_time_path(worker_id: current_worker.id, work_time_id: current_worker.work_times.last.id) %>
   <% else %>
     <%= button_to "Start Shift", create_work_time_path(id: current_worker.id) %>
   <% end %>
@@ -28,20 +28,24 @@
       <th>Date</th>
       <th>Start</th>
       <th>End</th>
+      <th></th>
     </tr>
     <% current_worker.work_times.reverse.each do |work_time| %>
-      <tr>
-        <td>
+      <tr id="<%= work_time.id %>">
+        <td class = "work-date">
           <%= work_time.work_start.to_date %>
         </td>
         <td class = "work-start">
           <%= work_time.work_start.strftime("%I:%M %p") %>
         </td>
-        <%if work_time.work_end%>
-          <td class = "work-end">
+        <td class = "work-end">
+          <%if work_time.work_end%>
             <%= work_time.work_start.strftime("%I:%M %p") %>
-          </td>
-        <%end%>
+          <%end%>
+        </td>
+        <td>
+          <button class="edit_button">edit</button>
+        </td>
       </tr>
     <% end %>
   </table>
