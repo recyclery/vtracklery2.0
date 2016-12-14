@@ -13,12 +13,15 @@ class WorkTimesController < ApplicationController
   end
 
   def update
+    puts "In the update method!!!!!!!!!!!!!!!!!"
     worktime = WorkTime.find(params[:id])
 
     worktime.update(
       work_start: params[:start],
       work_end: params[:end]
       )
+    puts "Saving!!!!!!!!!!!!!!!!!"
+    worktime.save
   end
 
   def end_shift
@@ -35,6 +38,12 @@ class WorkTimesController < ApplicationController
     if request.xhr?
       render json: @worktime
     end
+  end
+
+
+  def delete
+    worktime = WorkTime.find(params[:id])
+    worktime.destroy
   end
 
 
