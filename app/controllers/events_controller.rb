@@ -1,11 +1,11 @@
 class EventsController < ApplicationController
 
   def index
-    @events = Event.all
+    @events = Event.upcomming_events
   end
 
   def show
-    @event = Event.find[params[:id]]
+    @event = Event.includes(:workers).where(id: params[:id]).first
   end
 
   def new
