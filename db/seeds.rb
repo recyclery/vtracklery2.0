@@ -173,7 +173,7 @@ Skill.create(name: "drive stick")
 # worker skills
 
 Skill.all.each do |skill|
-  WorkerSkill.create(proficiency: rand(0..5), worker_id: rand(0..3), skill_id: skill.id)
+  WorkerSkill.create(proficiency: rand(0..5), worker_id: rand(1..3), skill_id: skill.id)
 end
 
 
