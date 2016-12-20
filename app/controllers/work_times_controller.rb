@@ -13,16 +13,20 @@ class WorkTimesController < ApplicationController
 
   def update
     worktime = WorkTime.find(params[:id])
-    worktime.update(
+
+    # worktime.update(
+    #   work_start: params[:start],
+    #   work_end: params[:end]
+    #   )
+
+    worktime.assign_attributes(
       work_start: params[:start],
       work_end: params[:end]
       )
-    if worktime.save
-      redirect_to "/"
-    else
-      puts "MOOOOOOOOOOOO"
-      @errors = worktime.errors.full_messages
-      render "/workers/show"
+
+    if request.xhr? && !worktime.save!
+      puts worktime.errors.full_messages[0]
+      render plain: worktime.errors.full_messages[0]
     end
   end
 
@@ -40,12 +44,6 @@ class WorkTimesController < ApplicationController
     if request.xhr?
       render json: @worktime
     end
-  end
-
-
-  def delete
-    worktime = WorkTime.find(params[:id])
-    worktime.destroy
   end
 
 

@@ -74,25 +74,27 @@ var setupsave = function(){
         data: data
       }).done(function(response){
 
+        console.log(response);
+
         $.ajax({
         url: "/work_times/" + workTimeID,
         method: "get"
         }).done(function(worktimeresponse){ // parse the server data and put it in the fields
 
-            serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
-            serverWorkStart = worktimeresponse["work_start"].substr(11, 8);
-            serverWorkEnd = worktimeresponse["work_end"].substr(11, 8);
+          serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
+          serverWorkStart = worktimeresponse["work_start"].substr(11, 8);
+          serverWorkEnd = worktimeresponse["work_end"].substr(11, 8);
 
-            var options = {
-                hour: "2-digit", minute: "2-digit"
-            };
+          var options = {
+              hour: "2-digit", minute: "2-digit"
+          };
 
 
-            $("td").children(".save_button").first().parent().siblings(".work-date").html(serverWorkDate);
-            $("td").children(".save_button").first().parent().siblings(".work-start").html(serverWorkStart);
-            $("td").children(".save_button").first().parent().siblings(".work-end").html(serverWorkEnd);
+          $("td").children(".save_button").first().parent().siblings(".work-date").html(serverWorkDate);
+          $("td").children(".save_button").first().parent().siblings(".work-start").html(serverWorkStart);
+          $("td").children(".save_button").first().parent().siblings(".work-end").html(serverWorkEnd);
 
-            $("td").children(".save_button").parent().html("<button class='edit_button'>edit</button>");
+          $("td").children(".save_button").parent().html("<button class='edit_button'>edit</button>");
         })
 
       })
