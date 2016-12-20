@@ -1,5 +1,5 @@
 <h3>Events</h3>
 <% @events.each do |event| %>
   <h4><b><%= link_to event.name, event %></b> <%= event.date %></h4>
-  <%= link_to update_path %>
+  <%= link_to :edit, edit_event_path(event) %>
 <% end %>

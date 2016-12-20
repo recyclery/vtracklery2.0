@@ -57,6 +57,7 @@ $( document ).ready(function(){
 
 
   $("td").on("click", ".save_button", function(){
+    var $permathis = $(this);
 
     var workDate = $("td").children(".save_button").first().parent().siblings(".work-date").children("input").val()
     var workStart = $("td").children(".save_button").first().parent().siblings(".work-start").children("input").val()
@@ -86,11 +87,6 @@ $( document ).ready(function(){
             serverWorkStart = worktimeresponse["work_start"].substr(11, 8);
             serverWorkEnd = worktimeresponse["work_end"].substr(11, 8);
 
-            var options = {
-                hour: "2-digit", minute: "2-digit"
-            };
-
-
             $("td").children(".save_button").first().parent().siblings(".work-date").html(serverWorkDate);
             $("td").children(".save_button").first().parent().siblings(".work-start").html(serverWorkStart);
             $("td").children(".save_button").first().parent().siblings(".work-end").html(serverWorkEnd);
@@ -110,17 +106,5 @@ $( document ).ready(function(){
   });
 
 
-  $("td").on("click", ".delete_button", function(){
-    row = $(this).parent().parent()
-    workTimeID = row.attr('id');
-
-    $.ajax({
-        url: "/work_times/" + workTimeID,
-        method: "post"
-        }).done(function(response){
-            row.hide();
-        });
-
-  });
 
 })
