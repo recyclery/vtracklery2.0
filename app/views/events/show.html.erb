@@ -1,7 +1,7 @@
 <h3><%= @event.name %></h3>
-<p>Date: <%= @event.date %></p>
-<p>Start Time: <%= @event.start_time %></p>
-<p>End Time: <%= @event.end_time %></p>
+<p>Date: <%= @event.date.strftime("%B %d, %Y") %></p>
+<p>Start Time: <%= @event.start_time.localtime.strftime("%I:%M, %p") %></p>
+<p>End Time: <%= @event.end_time.localtime.strftime("%I:%M, %p") %></p>
 
 <% if @event.workers %>
   <ul>

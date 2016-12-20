@@ -6,5 +6,5 @@ class Event < ApplicationRecord
   def self.upcomming_events
     Event.where("date > ?", Time.now)
   end
-  
+
 end
