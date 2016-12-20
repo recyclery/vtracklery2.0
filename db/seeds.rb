@@ -33,7 +33,7 @@ end
 
 
 
-Worker.create!(
+ben = Worker.create!(
   username: "ben.vansickle",
   first_name: "Ben",
   last_name: "Van Sickle",
@@ -53,7 +53,7 @@ rob = Worker.create!(
   password: "password"
   )
 
-Worker.create!(
+melanie = Worker.create!(
   username: "melanie.mazanec",
   first_name: "Melanie",
   last_name: "Mazanec",
@@ -91,6 +91,7 @@ today = Date.today
 
 Event.create!(
   name: "Open shop",
+  description: "Just come in, hang out, and work a bunch!",
   date: today,
   start_time: Time.new(today.year, today.month, today.day, 9, 0, 0, "+06:00"),
   end_time: Time.new(today.year, today.month, today.day, 17, 0, 0, "+06:00")
@@ -101,6 +102,7 @@ tomorrow = Date.tomorrow
 
 Event.create!(
   name: "Circus",
+  description: "We'll have a juggler, fire eater, and a dog that does tricks!",
   date: tomorrow,
   start_time: Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 9, 0, 0, "+06:00"),
   end_time: Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 17, 0, 0, "+06:00")
@@ -110,6 +112,7 @@ dat = Date.tomorrow + 1
 
 Event.create!(
   name: "Volunteer orientation",
+  description: "Learn the ropes to become a regular volunteer",
   date: dat,
   start_time: Time.new(dat.year, dat.month, dat.day, 9, 0, 0, "+06:00"),
   end_time: Time.new(dat.year, dat.month, dat.day, 17, 0, 0, "+06:00")
@@ -127,10 +130,9 @@ end
 
 # work times
 
-
 100.times do
   WorkTime.create!(
-    worker_id: Worker.all.sample.id,
+    worker_id: rand(4..23),
     event_id: Event.all.sample.id,
     work_type_id: WorkType.all.sample.id,
     work_start: Time.new(today.year, today.month, today.day, 9, 0, 0, "+06:00"),
@@ -139,12 +141,33 @@ end
 end
 
 
-WorkTime.create(
-    worker_id: rob.id,
-    event_id: Event.all.sample.id,
-    work_type_id: WorkType.all.sample.id,
-    work_start: Time.now
-    )
+Event.all.each do |ev|
+  WorkTime.create(
+      worker_id: ben.id,
+      event_id: ev.id,
+      work_type_id: WorkType.all.sample.id,
+      work_start: ev.start_time,
+      work_end: ev.end_time
+      )
+  WorkTime.create(
+      worker_id: rob.id,
+      event_id: ev.id,
+      work_type_id: WorkType.all.sample.id,
+      work_start: ev.start_time,
+      work_end: ev.end_time
+      )
+  WorkTime.create(
+      worker_id: melanie.id,
+      event_id: ev.id,
+      work_type_id: WorkType.all.sample.id,
+      work_start: ev.start_time,
+      work_end: ev.end_time
+      )
+end
+
+
+
+
 
 
 # skills
@@ -173,7 +196,7 @@ Skill.create(name: "drive stick")
 # worker skills
 
 Skill.all.each do |skill|
-  WorkerSkill.create(proficiency: rand(0..5), worker_id: rand(0..3), skill_id: skill.id)
+  WorkerSkill.create(proficiency: rand(0..5), worker_id: rand(1..3), skill_id: skill.id)
 end
 
 
