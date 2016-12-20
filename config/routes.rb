@@ -16,5 +16,6 @@ Rails.application.routes.draw do
 
   get "work_times/:id" => "work_times#show"
 
+  post "work_times/:id" => "work_times#delete"
 
 end
