@@ -23,9 +23,9 @@
   <% end %>
 
   <h2>Your recent time card activity:</h2>
-  <%if @errors%>
+  <%if @errors %>
     <%@errors.each do |e|%>
-      <%= e%>
+      <%= e %>
     <%end%>
   <%end%>
   <table class = "timecard">
@@ -45,11 +45,14 @@
         </td>
         <td class = "work-end">
           <%if work_time.work_end%>
-            <%= work_time.work_start.strftime("%I:%M %p") %>
+            <%= work_time.work_end.strftime("%I:%M %p") %>
           <%end%>
         </td>
         <td>
           <button class="edit_button">edit</button>
+        </td>
+        <td>
+          <button class="delete_button">delete</button>
         </td>
       </tr>
     <% end %>

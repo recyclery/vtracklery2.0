@@ -17,9 +17,10 @@ class WorkTimesController < ApplicationController
       work_start: params[:start],
       work_end: params[:end]
       )
-    if worktime.save!
+    if worktime.save
       redirect_to "/"
     else
+      puts "MOOOOOOOOOOOO"
       @errors = worktime.errors.full_messages
       render "/workers/show"
     end
@@ -39,6 +40,12 @@ class WorkTimesController < ApplicationController
     if request.xhr?
       render json: @worktime
     end
+  end
+
+
+  def delete
+    worktime = WorkTime.find(params[:id])
+    worktime.destroy
   end
 
 
