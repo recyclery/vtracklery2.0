@@ -4,8 +4,8 @@
   <%= f.label :date, "Date" %>
   <%= f.date_select :date, order: [:month, :day, :year], use_short_month: true, start_year: Time.now.year, default: Time.now + 1.days %>
   <%= f.label :start_time, "Start Time" %>
-  <%= f.time_select :start_time, order: [:minutes, :hours],default: Time.now.localtime.beginning_of_day + 9.hours, minute_step: 15 %>
+  <%= f.time_select :start_time, default: Time.zone.now.beginning_of_day + 9.hours, minute_step: 15 %>
   <%= f.label :end_time, "End Time" %>
-  <%= f.time_select :end_time, default: Time.now.localtime.end_of_day - 3.hours - 59.minutes, minute_step: 15 %>
+  <%= f.time_select :end_time, default: Time.zone.now.end_of_day - 3.hours - 59.minutes, minute_step: 15 %>
   <%= f.submit "Create Event", class: "btn" %>
 <% end %>

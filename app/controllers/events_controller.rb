@@ -10,7 +10,6 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    # p @event.start_time = Time.now.beginning_of_day + 9.hours
   end
 
   def create
