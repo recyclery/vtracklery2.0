@@ -23,6 +23,11 @@
   <% end %>
 
   <h2>Your recent time card activity:</h2>
+  <%if @errors%>
+    <%@errors.each do |e|%>
+      <%= e%>
+    <%end%>
+  <%end%>
   <table class = "timecard">
     <tr>
       <th>Date</th>

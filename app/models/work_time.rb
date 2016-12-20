@@ -11,14 +11,18 @@ class WorkTime < ApplicationRecord
     if self.work_end
 
       # if another work time starts earlier than self.work_start and ends after self.work_start
-      if self.worker.work_times.where("id != #{self.id}" && "work_start <= #{self.work_start}" && "work_end > #{self.work_start}").length > 0
-        self.errors.add(:work_start, "Work start time cannot overlap with another shift.")
-        puts self.errors.full_messages
+      if self.worker.work_times.where("id != ?", self.id).where("work_start <= ?", self.work_start).where("work_end >= ?", self.work_start).length > 0
+        self.errors.add(:work_start, "Shift cannot overlap with another shift.")
         return false
 
       # else if another work time starts earlier than self.work_end and ends after self.work_end
-      elsif self.worker.work_times.where("id != #{self.id}" && "work_start <= #{self.work_end}" && "work_end > #{self.work_end}")
-        self.errors.add(:work_end, "Work end time cannot overlap with another shift.")
+      elsif self.worker.work_times.where("id != ?", self.id).where("work_start <= ?", self.work_end).where("work_end > ?", self.work_end).length > 0
+        self.errors.add(:work_end, "Shift cannot overlap with another shift.")
+        return false
+
+      # else if work end time is before work begin time
+      elsif self.work_end < self.work_start
+        self.errors.add(:work_end, "Shift end time cannot be before shift begin time.")
         return false
       end
 

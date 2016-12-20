@@ -13,11 +13,16 @@ class WorkTimesController < ApplicationController
 
   def update
     worktime = WorkTime.find(params[:id])
-
     worktime.update(
       work_start: params[:start],
       work_end: params[:end]
       )
+    if worktime.save!
+      redirect_to "/"
+    else
+      @errors = worktime.errors.full_messages
+      render "/workers/show"
+    end
   end
 
   def end_shift
