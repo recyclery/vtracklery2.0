@@ -40,11 +40,14 @@
         </td>
         <td class = "work-end">
           <%if work_time.work_end%>
-            <%= work_time.work_start.strftime("%I:%M %p") %>
+            <%= work_time.work_end.strftime("%I:%M %p") %>
           <%end%>
         </td>
         <td>
           <button class="edit_button">edit</button>
+        </td>
+        <td>
+          <button class="delete_button">delete</button>
         </td>
       </tr>
     <% end %>
