@@ -11,7 +11,8 @@ class Worker < ApplicationRecord
   belongs_to :user_role
 
   def unclosed_shift
-    if !self.work_times.last.work_end
+
+    if self.work_times.last && !self.work_times.last.work_end
       return true
     else
       return false
