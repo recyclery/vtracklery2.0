@@ -1,0 +1,14 @@
+
+  <%= f.label :event_name, "Event Name" %>
+  <%= f.text_field :name, placeholder: "Event Name" %><br<>
+  <%= f.label :description %>
+  <%= f.text_area :description %><br />
+  <%= f.label :date, "Date" %>
+  <%= f.date_field :date, placeholder: (Time.now + 1.days).strftime("%Y-%m-%d") %>
+  <%# f.date_select :date, order: [:month, :day, :year], use_short_month: true, start_year: Time.now.year, default: Time.now + 1.days %>
+  <%= f.label :start_time, "Start Time" %>
+  <%= f.time_field :start_time %>
+  <!-- <input type="time" name="event[:start_time]" /> -->
+  <%# f.time_select :start_time, default: Time.zone.now.beginning_of_day + 9.hours, minute_step: 15 %>
+  <%= f.label :end_time, "End Time" %>
+  <%= f.time_field :end_time %>
