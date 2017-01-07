@@ -24,9 +24,10 @@ class WorkTimesController < ApplicationController
       work_end: params[:end]
       )
 
-    if request.xhr? && !worktime.save!
-      puts worktime.errors.full_messages[0]
-      render plain: worktime.errors.full_messages[0]
+    if request.xhr? && !worktime.save
+      puts "MOOOOOO"
+      p worktime.errors.messages.values[0][0]
+      render plain: worktime.errors.messages.values[0][0]
     end
   end
 

@@ -22,7 +22,7 @@ class WorkTime < ApplicationRecord
 
       # else if work end time is before work begin time
       elsif self.work_end < self.work_start
-        self.errors.add(:work_end, "Shift end time cannot be before shift begin time.")
+        self.errors.add(:work_end, "Shift cannot end before it starts.")
         return false
       end
 
