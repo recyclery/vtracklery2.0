@@ -61,8 +61,6 @@ var setupsave = function(){
 
     workTimeID = $(this).parent().parent().attr('id')
 
-    console.log("saving work-time number " + workTimeID + " with " + workDate + ", " + workStart + ", " + workEnd);
-
     revisedStart = workDate + " " + workStart
     revisedEnd = workDate + " " + workEnd //update this to consider times that extend into the next day
 
@@ -81,14 +79,50 @@ var setupsave = function(){
         method: "get"
         }).done(function(worktimeresponse){ // parse the server data and put it in the fields
 
-          serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
-          serverWorkStart = worktimeresponse["work_start"].substr(11, 8);
-          serverWorkEnd = worktimeresponse["work_end"].substr(11, 8);
+// <<<<<<< HEAD
+//           serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
+//           serverWorkStart = worktimeresponse["work_start"].substr(11, 8);
+//           serverWorkEnd = worktimeresponse["work_end"].substr(11, 8);
 
-          var options = {
-              hour: "2-digit", minute: "2-digit"
-          };
+//           var options = {
+//               hour: "2-digit", minute: "2-digit"
+//           };
+// =======
 
+            serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
+
+            var startHrs = worktimeresponse["work_start"].substr(11, 2);
+            var endHrs = worktimeresponse["work_end"].substr(11, 2);
+
+            var startMns = worktimeresponse["work_start"].substr(14, 2);
+            var endMns = worktimeresponse["work_end"].substr(14, 2);
+
+            var startAMPM = "AM"
+            var endAMPM = "AM"
+
+            if(parseInt(startHrs) > 12){
+              startHrs = (parseInt(startHrs) - 12).toString()
+
+              if(startHrs.length == 1){
+                startHrs = "0" + startHrs;
+              }
+
+              startAMPM = "PM"
+            }
+
+            if(parseInt(endHrs) > 12){
+              endHrs = (parseInt(endHrs) - 12).toString()
+
+              if(endHrs.length == 1){
+                endHrs = "0" + endHrs;
+              }
+
+              endAMPM = "PM"
+            }
+>>>>>>> master
+
+            serverWorkStart = startHrs + ":" + startMns + " " + startAMPM;
+            serverWorkEnd = endHrs + ":" + endMns + " " + endAMPM;
 
           $("td").children(".save_button").first().parent().siblings(".work-date").html(serverWorkDate);
           $("td").children(".save_button").first().parent().siblings(".work-start").html(serverWorkStart);

@@ -1,0 +1,15 @@
+<h3><%= @event.name %></h3>
+<p>Date: <%= @event.date.strftime("%B %d, %Y") %></p>
+<p>Start Time: <%= @event.start_time.strftime("%I:%M, %p") %></p>
+<p>End Time: <%= @event.end_time.strftime("%I:%M, %p") %></p>
+<p><%= @event.description %></p>
+
+<% if @event.workers %>
+  <ul>
+    <% @event.workers.each do |worker| %>
+    <li>
+      <%= "#{worker.first_name} #{worker.last_name}" %>
+    </li>
+    <% end %>
+  </ul>
+<% end %>
