@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   end
 
   def self.current_events
-    Event.where("end_time >= ?", Time.zone.now).order(date: :asc, name: :asc)
+    Event.where("start_time <= ?", Time.zone.now.beginning_of_day).where("end_time >= ?", Time.zone.now.beginning_of_day).order(date: :asc, name: :asc)
   end
 
 end
