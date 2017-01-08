@@ -6,11 +6,23 @@
   <p>Log your hours:</p>
 
   <% if current_worker.unclosed_shift %>
-    <p>There is an unclosed shift.  Please clock out.</p>
-    <%= button_to "End Shift", end_work_time_path(worker_id: current_worker.id, work_time_id: current_worker.work_times.last.id) %>
+    <div class="clock-in-out">
+      <p>There is an unclosed shift.  Please clock out.</p>
+      <%= button_to "End Shift", end_work_time_path(worker_id: current_worker.id, work_time_id: current_worker.work_times.last.id) %>
+    </div>
   <% else %>
-    <%= button_to "Start Shift", create_work_time_path(id: current_worker.id) %>
+    <p>What brings you to the Recyclery today?</p>
+    <%= form_for @work_time, url: create_work_time_path(id: current_worker.id) do |f| %>
+      <% Event.all.each do |e| %> <!-- change this to use a class method to only events within an hour or something of time begin -->
+        <%= f.radio_button(:event_id, e.id) %>
+        <%= label(:event_id, e.name) %>
+      <% end %>
+      <%= f.submit "Start Shift" %>
+    <% end %>
   <% end %>
+
+  <br>
+  <br>
 
   <h2>Your skills:</h2>
 
@@ -26,6 +38,7 @@
   <p class = "errors"></p>
   <table class = "timecard">
     <tr>
+      <th>Event</th>
       <th>Date</th>
       <th>Start</th>
       <th>End</th>
@@ -33,6 +46,9 @@
     </tr>
     <% current_worker.work_times.reverse.each do |work_time| %>
       <tr id="<%= work_time.id %>">
+        <td class = "work-event">
+          <%= work_time.event.name %>
+        </td>
         <td class = "work-date">
           <%= work_time.work_start.to_date %>
         </td>
