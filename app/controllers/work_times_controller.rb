@@ -38,6 +38,10 @@ class WorkTimesController < ApplicationController
     redirect_to "/"
   end
 
+  def delete
+    worktime = WorkTime.find(params[:id])
+    worktime.destroy
+  end
 
   def show
     @worktime = WorkTime.find(params[:id])

@@ -13,40 +13,62 @@ var setupedit = function(){
 
   $("td").on("click", ".edit_button", function(){
     var workDate = $(this).parent().siblings(".work-date").html().trim();
-
-    $(this).parent().siblings(".work-date").html("<input type='date' value='" + workDate + "'>");
-
     var workStart = $(this).parent().siblings(".work-start").html().trim();
-
-    var hours = Number(workStart.match(/^(\d+)/)[1]);
-    var minutes = Number(workStart.match(/:(\d+)/)[1]);
-    var AMPM = workStart.match(/\s(.*)$/)[1];
-    if(AMPM == "PM" && hours<12) hours = hours+12;
-    if(AMPM == "AM" && hours==12) hours = hours-12;
-    var sHours = hours.toString();
-    var sMinutes = minutes.toString();
-    if(hours<10) sHours = "0" + sHours;
-    if(minutes<10) sMinutes = "0" + sMinutes;
-    workStart = sHours + ":" + sMinutes;
-
-    $(this).parent().siblings(".work-start").html("<input type='time' value='" + workStart + "'>");
-
     var workEnd = $(this).parent().siblings(".work-end").html().trim();
 
-    hours = Number(workEnd.match(/^(\d+)/)[1]);
-    minutes = Number(workEnd.match(/:(\d+)/)[1]);
-    AMPM = workEnd.match(/\s(.*)$/)[1];
-    if(AMPM == "PM" && hours<12) hours = hours+12;
-    if(AMPM == "AM" && hours==12) hours = hours-12;
-    sHours = hours.toString();
-    sMinutes = minutes.toString();
-    if(hours<10) sHours = "0" + sHours;
-    if(minutes<10) sMinutes = "0" + sMinutes;
-    workEnd = sHours + ":" + sMinutes;
+    var month = workDate.substr(5, 2);
+    var day =  workDate.substr(8, 2);
+    var year =  workDate.substr(0, 4);
+    
+    var starthours = workStart.substr(0, 2);
+    var startminutes =  workStart.substr(3, 2);
+    var startAMPM =  workStart.substr(6, 2);
+    
+    var endhours = workEnd.substr(0, 2);
+    var endminutes =  workEnd.substr(3, 2);
+    var endAMPM =  workEnd.substr(6, 2);  
 
-    $(this).parent().siblings(".work-end").html("<input type='time' value='" + workEnd + "'>");
+    // $(this).parent().siblings(".work-end").html("<input type='time' value='" + workEnd + "'>");
+    
+    
+    
+    
+    
+    
+    
+    // $(this).parent().siblings(".work-date").html("<input type='date' value='" + workDate + "'>");
+    // $(this).parent().siblings(".work-start").html("<input type='time' value='" + workStart + "'>");
 
     $(this).parent().html("<button class='save_button'>save</button>");
+
+    // var hours = Number(workStart.match(/^(\d+)/)[1]);
+    // var minutes = Number(workStart.match(/:(\d+)/)[1]);
+    // var AMPM = workStart.match(/\s(.*)$/)[1];
+    // if(AMPM == "PM" && hours<12) hours = hours+12;
+    // if(AMPM == "AM" && hours==12) hours = hours-12;
+    // var sHours = hours.toString();
+    // var sMinutes = minutes.toString();
+    // if(hours<10) sHours = "0" + sHours;
+    // if(minutes<10) sMinutes = "0" + sMinutes;
+    // workStart = sHours + ":" + sMinutes;
+
+    
+    
+
+    // hours = Number(workEnd.match(/^(\d+)/)[1]);
+    // minutes = Number(workEnd.match(/:(\d+)/)[1]);
+    // AMPM = workEnd.match(/\s(.*)$/)[1];
+    // if(AMPM == "PM" && hours<12) hours = hours+12;
+    // if(AMPM == "AM" && hours==12) hours = hours-12;
+    // sHours = hours.toString();
+    // sMinutes = minutes.toString();
+    // if(hours<10) sHours = "0" + sHours;
+    // if(minutes<10) sMinutes = "0" + sMinutes;
+    // workEnd = sHours + ":" + sMinutes;
+
+    
+
+    
   });
 };
 
@@ -149,7 +171,7 @@ var setupdelete = function(){
       workTimeID = row.attr('id');
 
       $.ajax({
-          url: "/work_times/" + workTimeID,
+          url: "/work_times/delete/" + workTimeID,
           method: "post"
           }).done(function(response){
               row.hide();
