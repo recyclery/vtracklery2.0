@@ -2,7 +2,8 @@ class WorkTimesController < ApplicationController
 
   def create
     # change this to strong params
-    new_work_time = WorkTime.new(worker_id: current_worker.id, work_start: Time.now, event_id: params["work_time"][:event_id], work_type_id: 1)
+    params["work_time"] ? event_id = params["work_time"][:event_id] : event_id = 1
+    new_work_time = WorkTime.new(worker_id: current_worker.id, work_start: Time.now, event_id: event_id, work_type_id: 1)
     if new_work_time.save!
       redirect_to "/"
     else

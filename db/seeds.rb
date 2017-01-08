@@ -94,7 +94,7 @@ Event.create!(
   description: "Just come in, hang out, and work a bunch!",
   date: today,
   start_time: Time.new(today.year, today.month, today.day, 9, 0, 0, "+06:00"),
-  end_time: Time.new(today.year, today.month, today.day, 17, 0, 0, "+06:00")
+  end_time: Time.new(today.year + 1, today.month, today.day, 17, 0, 0, "+06:00")
   )
 
 
