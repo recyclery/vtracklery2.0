@@ -72,11 +72,25 @@ var setupsave = function(){
         data: data
       }).done(function(response){
 
+        if(response.length > 5){
+          // if there's an error message-- controller is returning first of "full messages"
+          $("p.errors").text(response);
+        }
+
         $.ajax({
         url: "/work_times/" + workTimeID,
         method: "get"
         }).done(function(worktimeresponse){ // parse the server data and put it in the fields
 
+// <<<<<<< HEAD
+//           serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
+          serverWorkStart = worktimeresponse["work_start"].substr(11, 8);
+          serverWorkEnd = worktimeresponse["work_end"].substr(11, 8);
+
+//           var options = {
+//               hour: "2-digit", minute: "2-digit"
+//           };
+// =======
 
             serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
 
@@ -112,11 +126,11 @@ var setupsave = function(){
             serverWorkStart = startHrs + ":" + startMns + " " + startAMPM;
             serverWorkEnd = endHrs + ":" + endMns + " " + endAMPM;
 
-            $("td").children(".save_button").first().parent().siblings(".work-date").html(serverWorkDate);
-            $("td").children(".save_button").first().parent().siblings(".work-start").html(serverWorkStart);
-            $("td").children(".save_button").first().parent().siblings(".work-end").html(serverWorkEnd);
+          $("td").children(".save_button").first().parent().siblings(".work-date").html(serverWorkDate);
+          $("td").children(".save_button").first().parent().siblings(".work-start").html(serverWorkStart);
+          $("td").children(".save_button").first().parent().siblings(".work-end").html(serverWorkEnd);
 
-            $("td").children(".save_button").parent().html("<button class='edit_button'>edit</button>");
+          $("td").children(".save_button").parent().html("<button class='edit_button'>edit</button>");
         })
 
       })

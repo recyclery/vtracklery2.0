@@ -87,3 +87,8 @@ input[type="submit"]:active {
 a:hover{
   color:#5cbf2a;
 }
+
+.errors {
+  color: red;
+  text-align: center;
+}

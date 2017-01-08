@@ -4,7 +4,6 @@ class WorkTimesController < ApplicationController
     # change this to strong params
     new_work_time = WorkTime.new(worker_id: current_worker.id, work_start: Time.now, event_id: 1, work_type_id: 1)
     if new_work_time.save!
-      p new_work_time.id
       redirect_to "/"
     else
       @errors = new_work_time.errors.full_messages
@@ -13,15 +12,23 @@ class WorkTimesController < ApplicationController
   end
 
   def update
-    puts "In the update method!!!!!!!!!!!!!!!!!"
     worktime = WorkTime.find(params[:id])
 
-    worktime.update(
+    # worktime.update(
+    #   work_start: params[:start],
+    #   work_end: params[:end]
+    #   )
+
+    worktime.assign_attributes(
       work_start: params[:start],
       work_end: params[:end]
       )
-    puts "Saving!!!!!!!!!!!!!!!!!"
-    worktime.save
+
+    if request.xhr? && !worktime.save
+      puts "MOOOOOO"
+      p worktime.errors.messages.values[0][0]
+      render plain: worktime.errors.messages.values[0][0]
+    end
   end
 
   def end_shift
@@ -38,12 +45,6 @@ class WorkTimesController < ApplicationController
     if request.xhr?
       render json: @worktime
     end
-  end
-
-
-  def delete
-    worktime = WorkTime.find(params[:id])
-    worktime.destroy
   end
 
 
