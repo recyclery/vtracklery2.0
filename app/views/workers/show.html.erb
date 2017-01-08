@@ -13,7 +13,7 @@
   <% else %>
     <p>What brings you to the Recyclery today?</p>
     <%= form_for @work_time, url: create_work_time_path(id: current_worker.id) do |f| %>
-      <% Event.all.each do |e| %> <!-- change this to use a class method to only events within an hour or something of time begin -->
+      <% Event.current_events.each do |e| %> <!-- change this to use a class method to only events within an hour or something of time begin -->
         <%= f.radio_button(:event_id, e.id) %>
         <%= label(:event_id, e.name) %>
       <% end %>
