@@ -12,8 +12,9 @@ class WorkTimesController < ApplicationController
   end
 
   def update
+p "In the method!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     worktime = WorkTime.find(params[:id])
-
+p worktime
     # worktime.update(
     #   work_start: params[:start],
     #   work_end: params[:end]
@@ -23,11 +24,13 @@ class WorkTimesController < ApplicationController
       work_start: params[:start],
       work_end: params[:end]
       )
-
+p worktime
     if request.xhr? && !worktime.save
-      puts "MOOOOOO"
+      puts "WOOOOOO"
       p worktime.errors.messages.values[0][0]
       render plain: worktime.errors.messages.values[0][0]
+    else
+      puts worktime.errors.full_messages  
     end
   end
 

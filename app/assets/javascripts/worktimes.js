@@ -224,33 +224,6 @@ var setupedit = function(){
 
     $(this).parent().html("<button class='save_button'>save</button>");
 
-    // var hours = Number(workStart.match(/^(\d+)/)[1]);
-    // var minutes = Number(workStart.match(/:(\d+)/)[1]);
-    // var AMPM = workStart.match(/\s(.*)$/)[1];
-    // if(AMPM == "PM" && hours<12) hours = hours+12;
-    // if(AMPM == "AM" && hours==12) hours = hours-12;
-    // var sHours = hours.toString();
-    // var sMinutes = minutes.toString();
-    // if(hours<10) sHours = "0" + sHours;
-    // if(minutes<10) sMinutes = "0" + sMinutes;
-    // workStart = sHours + ":" + sMinutes;
-
-    
-    
-
-    // hours = Number(workEnd.match(/^(\d+)/)[1]);
-    // minutes = Number(workEnd.match(/:(\d+)/)[1]);
-    // AMPM = workEnd.match(/\s(.*)$/)[1];
-    // if(AMPM == "PM" && hours<12) hours = hours+12;
-    // if(AMPM == "AM" && hours==12) hours = hours-12;
-    // sHours = hours.toString();
-    // sMinutes = minutes.toString();
-    // if(hours<10) sHours = "0" + sHours;
-    // if(minutes<10) sMinutes = "0" + sMinutes;
-    // workEnd = sHours + ":" + sMinutes;
-
-    
-
     
   });
 };
@@ -258,44 +231,55 @@ var setupedit = function(){
 
 
 var setupsave = function(){
-  $("td").on("click", ".save_button", function(){
+  $("td").on("click", ".save_button", function(event){
 
-    var workDate = $("td").children(".save_button").first().parent().siblings(".work-date").children("input").val()
-    var workStart = $("td").children(".save_button").first().parent().siblings(".work-start").children("input").val()
-    var workEnd = $("td").children(".save_button").first().parent().siblings(".work-end").children("input").val()
+    var $saveButtonCell = $(this).parent(),
+        $currentWorkDateField = $saveButtonCell.siblings('.work-date');
+        $currentWorkStartField = $saveButtonCell.siblings('.work-start');
+        $currentWorkEndField = $saveButtonCell.siblings('.work-end');
+        
+    var workDay = $currentWorkDateField.children("select[class='day']").val();
+    var workMonth = $currentWorkDateField.children("select[class='month']").val();
+    var workYear = $currentWorkDateField.children("select[class='year']").val();
 
-    workTimeID = $(this).parent().parent().attr('id')
+    var workStartHour = $currentWorkStartField.children("select[class='hour']").val();
+    var workStartMinute = $currentWorkStartField.children("select[class='minute']").val();
+    var workStartAMPM = $currentWorkStartField.children("select[class='ampm']").val();
+    
+    var workEndHour = $currentWorkEndField.children("select[class='hour']").val();
+    var workEndMinute = $currentWorkEndField.children("select[class='minute']").val();
+    var workEndAMPM = $currentWorkEndField.children("select[class='ampm']").val();
+    
+    var workTimeID = $(this).parent().parent().attr('id');
 
-    revisedStart = workDate + " " + workStart
-    revisedEnd = workDate + " " + workEnd //update this to consider times that extend into the next day
+    // work_start: "2017-01-13 03:00:00"
+    // work_end: "2017-01-13 11:00:00"
+    
+    if(workStartAMPM = "PM"){
+      workStartHour = (parseInt(workStartHour) + 12).toString();
+      
+    }
+    
+    if(workEndAMPM = "PM"){
+      workEndHour = (parseInt(workEndHour) + 12).toString();
+    }
+    
+    var revisedStart = workYear + "-" + workMonth + "-" + workDay + " " + workStartHour + ":" + workStartMinute + ":00"
+    var revisedEnd = workYear + "-" + workMonth + "-" + workDay + " " + workEndHour + ":" + workEndMinute + ":00"
+    //update this to consider times that extend into the next day
 
     data = {start: revisedStart, end: revisedEnd, id: workTimeID}
-
+    
     $.ajax({
         url: "/work_times/" + workTimeID,
         method: "patch",
         data: data
       }).done(function(response){
 
-        if(response.length > 5){
-          // if there's an error message-- controller is returning first of "full messages"
-          $("p.errors").text(response);
-        }
-
         $.ajax({
         url: "/work_times/" + workTimeID,
         method: "get"
         }).done(function(worktimeresponse){ // parse the server data and put it in the fields
-
-// <<<<<<< HEAD
-//           serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
-          serverWorkStart = worktimeresponse["work_start"].substr(11, 8);
-          serverWorkEnd = worktimeresponse["work_end"].substr(11, 8);
-
-//           var options = {
-//               hour: "2-digit", minute: "2-digit"
-//           };
-// =======
 
             serverWorkDate = worktimeresponse["work_start"].substr(0, 10);
 
@@ -328,14 +312,16 @@ var setupsave = function(){
               endAMPM = "PM"
             }
 
-            serverWorkStart = startHrs + ":" + startMns + " " + startAMPM;
-            serverWorkEnd = endHrs + ":" + endMns + " " + endAMPM;
+          serverWorkStart = startHrs + ":" + startMns + " " + startAMPM;
+          serverWorkEnd = endHrs + ":" + endMns + " " + endAMPM;
 
-          $("td").children(".save_button").first().parent().siblings(".work-date").html(serverWorkDate);
-          $("td").children(".save_button").first().parent().siblings(".work-start").html(serverWorkStart);
-          $("td").children(".save_button").first().parent().siblings(".work-end").html(serverWorkEnd);
+          $currentWorkDateField.html(serverWorkDate);
+          $currentWorkStartField.html(serverWorkStart);
+          $currentWorkEndField.html(serverWorkEnd);
 
-          $("td").children(".save_button").parent().html("<button class='edit_button'>edit</button>");
+
+
+         $saveButtonCell.html("<button class='edit_button'>edit</button>");
         })
 
       })
