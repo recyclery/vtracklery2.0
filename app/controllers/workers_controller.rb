@@ -9,7 +9,10 @@ class WorkersController < ApplicationController
     end
 
     if current_worker && current_worker.work_times && current_worker.work_times.last && current_worker.work_times.last.work_end == nil
+      @work_time = current_worker.work_times.last
       @unclosed_shift = current_worker.work_times.last
+    else
+      @work_time = WorkTime.new
     end
 
   end
