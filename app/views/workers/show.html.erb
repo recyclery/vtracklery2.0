@@ -1,6 +1,6 @@
 <% if !current_worker %>
   Please log in.
-<% else %>
+<% elsif current_worker.id === @worker_id %>
   <h1><%= "Welcome, #{current_worker.first_name}!" %></h1>
 
   <p>Log your hours:</p>
@@ -24,7 +24,7 @@
   <br>
   <br>
 
-  <h2>Your skills:</h2>
+  <h2>Skills:</h2>
 
   <% current_worker.worker_skills.each do |worker_skill| %>
     <%= worker_skill.skill.name %>
@@ -34,7 +34,7 @@
     <br>
   <% end %>
 
-  <h2>Your recent time card activity:</h2>
+  <h2>Recent time card activity:</h2>
   <p class = "errors"></p>
   <table class = "timecard">
     <tr>
@@ -70,6 +70,8 @@
     <% end %>
   </table>
 
+<else>
+  <h1>OH HEY ADMIN</h1>
 
 
 

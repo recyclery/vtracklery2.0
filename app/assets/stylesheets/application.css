@@ -30,7 +30,6 @@ body{
 }
 
 .navbar-nav li{
-  width: 15%;
   display: inline-block;
   float: right;
   font-size: 1.5vw;
