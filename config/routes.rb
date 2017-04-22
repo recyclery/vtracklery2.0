@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   resources :events do
   end
 
-  devise_scope :worker do
-    root 'layouts#index'
-  end
+
+  root 'application#index'
 
   get "workers" => "workers#index", as: "workers"
 
