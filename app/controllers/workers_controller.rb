@@ -10,6 +10,7 @@ class WorkersController < ApplicationController
       redirect_to new_worker_session_path
     end
 
+
     if current_worker && current_worker.work_times && current_worker.work_times.last && current_worker.work_times.last.work_end == nil
       @work_time = current_worker.work_times.last
       @unclosed_shift = current_worker.work_times.last
@@ -17,8 +18,7 @@ class WorkersController < ApplicationController
       @work_time = WorkTime.new
     end
 
-    print params
-
+    @worker = Worker.find(params[:worker_id])
   end
 
   def new
