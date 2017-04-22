@@ -1,0 +1,21 @@
+<h3>Administrators</h3>
+  <%if @admins%>
+    <ul>
+      <%@admins.each do |admin|%>
+        <li>
+          <%= link_to("#{admin.first_name} #{admin.last_name}", worker_show_path(id: admin.id))%>
+        </li>
+      <%end%>
+    </ul>
+  <%end%>
+
+<h3>Volunteers</h3>
+  <%if @volunteers%>
+    <ul>
+      <%@volunteers.each do |volunteer|%>
+        <li>
+          <%= link_to("#{volunteer.first_name} #{volunteer.last_name}", worker_show_path(id: volunteer.id))%>
+        </li>
+      <%end%>
+    </ul>
+  <%end%>

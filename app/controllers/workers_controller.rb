@@ -1,6 +1,8 @@
 class WorkersController < ApplicationController
 
   def index
+    @admins = UserRole.find_by(role: "Admin").workers
+    @volunteers = UserRole.find_by(role: "Volunteer").workers
   end
 
   def show
@@ -14,6 +16,8 @@ class WorkersController < ApplicationController
     else
       @work_time = WorkTime.new
     end
+
+    print params
 
   end
 

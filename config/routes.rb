@@ -7,9 +7,13 @@ Rails.application.routes.draw do
   resources :events do
   end
 
-  devise_scope :worker do
-    root 'workers#show'
-  end
+
+  root 'application#index'
+
+  get "workers" => "workers#index", as: "workers"
+
+  get "workers/:id" => "workers#show", as: "worker_show"
+
 
   post "workers/:id/work_times" => "work_times#create", as: "create_work_time"
 
