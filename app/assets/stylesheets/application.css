@@ -30,7 +30,6 @@ body{
 }
 
 .navbar-nav li{
-  width: 15%;
   display: inline-block;
   float: right;
   font-size: 1.5vw;
@@ -42,7 +41,7 @@ body{
 }
 
 .timecard{
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
   text-align: center;
 }
@@ -91,4 +90,10 @@ a:hover{
 .errors {
   color: red;
   text-align: center;
+}
+
+.clock-in-out {
+  float:left;
+  display:inline;
+  width: 50%;
 }

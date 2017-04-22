@@ -1,60 +1,76 @@
 <% if !current_worker %>
   Please log in.
-<% else %>
+<% elsif current_worker.id === @worker_id %>
   <h1><%= "Welcome, #{current_worker.first_name}!" %></h1>
 
   <p>Log your hours:</p>
 
   <% if current_worker.unclosed_shift %>
-    <p>There is an unclosed shift.  Please clock out.</p>
-    <%= button_to "End Shift", end_work_time_path(worker_id: current_worker.id, work_time_id: current_worker.work_times.last.id) %>
+    <div class="clock-in-out">
+      <p>There is an unclosed shift.  Please clock out.</p>
+      <%= button_to "End Shift", end_work_time_path(worker_id: current_worker.id, work_time_id: current_worker.work_times.last.id) %>
+    </div>
   <% else %>
-    <%= button_to "Start Shift", create_work_time_path(id: current_worker.id) %>
+    <p>What brings you to the Recyclery today?</p>
+    <%= form_for @work_time, url: create_work_time_path(worker_id: current_worker.id) do |f| %>
+      <% Event.current_events.each do |e| %> <!-- change this to use a class method to only events within an hour or something of time begin -->
+        <%= f.radio_button(:event_id, e.id) %>
+        <%= label(:event_id, e.name) %>
+      <% end %>
+      <%= f.submit "Start Shift" %>
+    <% end %>
   <% end %>
 
-  <h2>Your skills:</h2>
+  <br>
+  <br>
 
-  <% current_worker.worker_skills.each do |worker_skill| %>
-    <%= worker_skill.skill.name %>
-    <% worker_skill.proficiency.times do %>
-    *
-    <% end %>
-    <br>
-  <% end %>
-
-  <h2>Your recent time card activity:</h2>
-  <p class = "errors"></p>
-  <table class = "timecard">
-    <tr>
-      <th>Date</th>
-      <th>Start</th>
-      <th>End</th>
-      <th></th>
-    </tr>
-    <% current_worker.work_times.reverse.each do |work_time| %>
-      <tr id="<%= work_time.id %>">
-        <td class = "work-date">
-          <%= work_time.work_start.to_date %>
-        </td>
-        <td class = "work-start">
-          <%= work_time.work_start.strftime("%I:%M %p") %>
-        </td>
-        <td class = "work-end">
-          <%if work_time.work_end%>
-            <%= work_time.work_end.strftime("%I:%M %p") %>
-          <%end%>
-        </td>
-        <td>
-          <button class="edit_button">edit</button>
-        </td>
-        <td>
-          <button class="delete_button">delete</button>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-
-
-
-
+<% else %>
+  <h1><%= "#{@worker.first_name} #{@worker.last_name}" %></h1>
 <% end %>
+
+
+<h2>Skills:</h2>
+
+<% @worker.worker_skills.each do |worker_skill| %>
+  <%= worker_skill.skill.name %>
+  <% worker_skill.proficiency.times do %>
+  *
+  <% end %>
+  <br>
+<% end %>
+
+<h2>Recent time card activity:</h2>
+<p class = "errors"></p>
+<table class = "timecard">
+  <tr>
+    <th>Event</th>
+    <th>Date</th>
+    <th>Start</th>
+    <th>End</th>
+    <th></th>
+  </tr>
+  <% @worker.work_times.reverse.each do |work_time| %>
+    <tr id="<%= work_time.id %>">
+      <td class = "work-event">
+        <%= work_time.event.name %>
+      </td>
+      <td class = "work-date">
+        <%= work_time.work_start.to_date %>
+      </td>
+      <td class = "work-start">
+        <%= work_time.work_start.strftime("%I:%M %p") %>
+      </td>
+      <td class = "work-end">
+        <%if work_time.work_end%>
+          <%= work_time.work_end.strftime("%I:%M %p") %>
+        <%end%>
+      </td>
+      <td>
+        <button class="edit_button">edit</button>
+      </td>
+      <td>
+        <button class="delete_button">delete</button>
+      </td>
+    </tr>
+  <% end %>
+</table>

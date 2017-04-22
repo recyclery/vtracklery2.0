@@ -2,7 +2,8 @@ class WorkTimesController < ApplicationController
 
   def create
     # change this to strong params
-    new_work_time = WorkTime.new(worker_id: current_worker.id, work_start: Time.now, event_id: 1, work_type_id: 1)
+    params["work_time"] ? event_id = params["work_time"][:event_id] : event_id = 1
+    new_work_time = WorkTime.new(worker_id: current_worker.id, work_start: Time.now, event_id: event_id, work_type_id: 1)
     if new_work_time.save!
       redirect_to "/"
     else
@@ -12,9 +13,8 @@ class WorkTimesController < ApplicationController
   end
 
   def update
-p "In the method!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     worktime = WorkTime.find(params[:id])
-p worktime
+
     # worktime.update(
     #   work_start: params[:start],
     #   work_end: params[:end]
@@ -24,9 +24,9 @@ p worktime
       work_start: params[:start],
       work_end: params[:end]
       )
-p worktime
+
     if request.xhr? && !worktime.save
-      puts "WOOOOOO"
+      puts "Ajax............."
       p worktime.errors.messages.values[0][0]
       render plain: worktime.errors.messages.values[0][0]
     else
@@ -52,6 +52,11 @@ p worktime
     if request.xhr?
       render json: @worktime
     end
+  end
+
+  def delete
+    worktime = WorkTime.find(params[:id])
+    worktime.destroy
   end
 
 
