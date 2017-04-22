@@ -3,7 +3,7 @@
     <ul>
       <%@admins.each do |admin|%>
         <li>
-          <%= link_to("#{admin.first_name} #{admin.last_name}", worker_show_path(id: admin.id))%>
+          <%= link_to("#{admin.first_name} #{admin.last_name}", worker_show_path(worker_id: admin.id))%>
         </li>
       <%end%>
     </ul>
@@ -14,7 +14,7 @@
     <ul>
       <%@volunteers.each do |volunteer|%>
         <li>
-          <%= link_to("#{volunteer.first_name} #{volunteer.last_name}", worker_show_path(id: volunteer.id))%>
+          <%= link_to("#{volunteer.first_name} #{volunteer.last_name}", worker_show_path(worker_id: volunteer.id))%>
         </li>
       <%end%>
     </ul>
