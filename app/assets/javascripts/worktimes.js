@@ -1,13 +1,8 @@
-
-
 var worktimes = function(){
   setupedit();
   setupsave();
   setupdelete();
 };
-
-
-
 
 var setupedit = function(){
 
@@ -260,8 +255,8 @@ var setupsave = function(){
       
     }
     
-    if(workEndAMPM = "PM"){
-      workEndHour = (parseInt(workEndHour) + 12).toString();
+    if(workEndAMPM = "AM"){
+      workEndHour = (parseInt(workEndHour)).toString();
     }
     
     var revisedStart = workYear + "-" + workMonth + "-" + workDay + " " + workStartHour + ":" + workStartMinute + ":00"
@@ -270,6 +265,8 @@ var setupsave = function(){
 
     data = {start: revisedStart, end: revisedEnd, id: workTimeID}
     
+    console.log(data);
+
     $.ajax({
         url: "/work_times/" + workTimeID,
         method: "patch",
