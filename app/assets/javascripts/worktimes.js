@@ -249,28 +249,27 @@ var setupsave = function(){
 
     // work_start: "2017-01-13 03:00:00"
     // work_end: "2017-01-13 11:00:00"
-    
-    if(workStartAMPM = "PM"){
+
+    if(workStartAMPM == "PM"){
       workStartHour = (parseInt(workStartHour) + 12).toString();
     }
     else{
       workStartHour = (parseInt(workStartHour)).toString();
     }
     
-    if(workEndAMPM = "PM"){
+    if(workEndAMPM == "PM"){
       workEndHour = (parseInt(workEndHour) + 12).toString();
     }
     else{
       workEndHour = (parseInt(workEndHour)).toString();
     }
     
+
     var revisedStart = workYear + "-" + workMonth + "-" + workDay + " " + workStartHour + ":" + workStartMinute + ":00"
     var revisedEnd = workYear + "-" + workMonth + "-" + workDay + " " + workEndHour + ":" + workEndMinute + ":00"
-    //update this to consider times that extend into the next day
+    //update this to accept shifts that extend into the next day
 
     data = {start: revisedStart, end: revisedEnd, id: workTimeID}
-    
-    console.log(data);
 
     $.ajax({
         url: "/work_times/" + workTimeID,
