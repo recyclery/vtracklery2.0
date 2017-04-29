@@ -19,24 +19,24 @@
           <ul class="nav navbar-nav">
             <%if current_worker%>
               <li>
-                <%=link_to("Profile", worker_show_path(worker_id: current_worker.id))%>
+                <%=link_to("profile", worker_show_path(worker_id: current_worker.id))%>
               </li>
               <li>
-                <%=link_to("Log Out", destroy_worker_session_path, {method: "delete"})%>
+                <%=link_to("log out", destroy_worker_session_path, {method: "delete"})%>
               </li>
 
             <% else %>
               <li>
-                <%=link_to("Sign In", new_worker_session_path)%>
+                <%=link_to("sign in", new_worker_session_path)%>
               </li>
             <%end%>
 
             <%if current_worker && current_worker.user_role.role === "Admin"%>
               <li>
-                <%=link_to("Events", events_path)%>
+                <%=link_to("events", events_path)%>
               </li>
               <li>
-                <%=link_to("Workers", workers_path)%>
+                <%=link_to("workers", workers_path)%>
               </li>
             <%end%>
           </ul>
@@ -44,6 +44,7 @@
         </div>
       </div>
     </nav>
+    <br>
     <div class = "page-content">
       <%= yield %>
     </div>

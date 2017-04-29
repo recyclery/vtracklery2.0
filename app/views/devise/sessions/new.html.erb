@@ -1,42 +1,38 @@
-<h2>Log in</h2>
-
-<% if alert %>
-  <div id="notice_wrapper">
-    <p class="alert"><%= alert.downcase.capitalize %></p>
-    <!-- downcase and capitalize because of error with devise grammar -->
-  </div>
-<% elsif notice %>
-  <div id="notice_wrapper">
-    <p class="notice"><%= notice.downcase.capitalize %></p>
-  </div>
-<% end %>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class='login-registrations-wrapper'>
+  
+  <% if alert %>
+    <div id="notice_wrapper">
+      <p class="alert"><%= alert.downcase.capitalize %></p>
+      <!-- downcase and capitalize because of error with devise grammar -->
     </div>
-  <% end -%>
+  <% elsif notice %>
+    <div id="notice_wrapper">
+      <p class="notice"><%= notice.downcase.capitalize %></p>
+    </div>
+  <% end %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <% if devise_mapping.rememberable? -%>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end -%>
 
-<!-- <p>Recent users:</p>
+    <div class="actions">
+      <%= f.submit "Log in" %>
+    </div>
+  <% end %>
 
-<% @workers.each do |worker| %>
-  <%= worker.username %><br>
-<% end %> -->
+  <%= render "devise/shared/links" %>
+
+</div>

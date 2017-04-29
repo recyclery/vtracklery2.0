@@ -1,18 +1,4 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* STYLES FOR EVERY PAGE */
 
 html{
   position:relative;
@@ -21,24 +7,141 @@ html{
 
 body{
   text-align: left;
-  font-family: 'Open Sans', sans-serif;
-/*  font from https://bootstrapbay.com/blog/google-web-fonts/*/
+  font-family: Merriweather;
+  margin: 0 auto;
+  /*background-color: #ecebe9;*/
+}
+
+nav {
+  background-color: #632600 !important;
+  height: 20%;
+  padding: 2%;
+}
+
+nav a {
+  text-decoration: none;
 }
 
 .navbar-header a:hover{
-  color:#5cbf2a !important;
+  color: #632600
 }
 
-.navbar-nav li{
+.navbar-brand {
+  color: white !important;
+  letter-spacing: 0.3em;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 36px;
+  width: 30%;
+  padding-left: 5%;
+}
+
+nav ul {
   display: inline-block;
+  list-style: none;
   float: right;
-  font-size: 1.5vw;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 10px;
+  letter-spacing: 0.1em;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #f05023;
 }
 
 .page-content{
   margin: 0 auto;
   width: 90%;
 }
+
+footer {
+  background-color: #632600 !important;
+  padding: 2%;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  height: .25vh;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  font-size: 1vw;
+  text-align: center;
+  overflow: hidden;
+}
+
+footer p {
+  margin: 0 auto;
+  top: 50%;
+}
+
+
+/*LOG IN SPECIFIC THINGS*/
+
+.login-registrations-wrapper {
+  text-align: center;
+  color: #f05023;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.login-registrations-wrapper div {
+  padding: 1%;
+}
+
+.login-registrations-wrapper a {
+  text-decoration: none;
+}
+
+#shared-links-wrapper {
+  text-align: center;
+  display: inline-table;
+  width: 50%;
+  text-transform: lowercase;
+}
+
+#shared-links-wrapper a {
+  color: #f05023;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  display: table-cell;
+  border: 4px outset;
+  padding: 2px;
+  text-decoration: none;
+  -moz-border-radius:28px;
+  -webkit-border-radius:28px;
+  border-radius:28px;
+  cursor:pointer;
+  font-size: 2vw;
+  padding:6px 3px;
+  text-shadow:0px 1px 0px #2f6627;
+  text-transform: lowercase;
+}
+
+input[type="submit"]{
+  background-color: white;
+  -moz-border-radius:28px;
+  -webkit-border-radius:28px;
+  border-radius:28px;
+  display:inline-block;
+  cursor:pointer;
+  color: #f05023;
+  font-size: 2vw;
+  padding:6px 3px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #2f6627;
+  text-transform: lowercase;
+}
+input[type="submit"]:hover {
+  background-color: #ecebe9;
+}
+input[type="submit"]:active {
+  position:relative;
+  top:1px;
+}
+
+
 
 .timecard{
   width: 70%;
@@ -52,39 +155,6 @@ body{
 
 #notice_wrapper{
   color: red;
-}
-
-footer{
-  font-size: 1vw;
-  text-align: center;
-  bottom: 0;
-  width: 100%;
-  overflow:hidden;
-  padding-top: 2vh;
-}
-
-input[type="submit"]{
-  -moz-border-radius:28px;
-  -webkit-border-radius:28px;
-  border-radius:28px;
-  display:inline-block;
-  cursor:pointer;
-  color:#ffffff;
-  font-size: 2vw;
-  padding:6px 3px;
-  text-decoration:none;
-  text-shadow:0px 1px 0px #2f6627;
-}
-input[type="submit"]:hover {
-  background-color:#5cbf2a;
-}
-input[type="submit"]:active {
-  position:relative;
-  top:1px;
-}
-
-a:hover{
-  color:#5cbf2a;
 }
 
 .errors {
