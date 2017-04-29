@@ -252,10 +252,15 @@ var setupsave = function(){
     
     if(workStartAMPM = "PM"){
       workStartHour = (parseInt(workStartHour) + 12).toString();
-      
+    }
+    else{
+      workStartHour = (parseInt(workStartHour)).toString();
     }
     
-    if(workEndAMPM = "AM"){
+    if(workEndAMPM = "PM"){
+      workEndHour = (parseInt(workEndHour) + 12).toString();
+    }
+    else{
       workEndHour = (parseInt(workEndHour)).toString();
     }
     
