@@ -3,13 +3,15 @@
 html{
   position:relative;
   min-height: 100%;
+  max-width: 100%;
 }
 
 body{
   text-align: left;
   font-family: Merriweather;
   margin: 0 auto;
-  /*background-color: #ecebe9;*/
+  left: 0;
+  right: 0;
 }
 
 nav {
@@ -94,47 +96,89 @@ footer p {
   text-decoration: none;
 }
 
-#shared-links-wrapper {
-  text-align: center;
-  display: inline-table;
-  width: 50%;
+.field label {
+  color: #f05023;
+  font-size: 1.75vw;
+  line-height: 30px;
+  letter-spacing: 0.05em;
+  text-decoration: none;  
+  text-shadow:0px 1px 0px #ecebe9;
+}
+
+#worker_email, #worker_password {
+  padding:6px 3px;
+  border: 4px outset;
+  text-decoration: none;
+  -moz-border-radius:28px;
+  -webkit-border-radius:28px;
+  border-radius:28px;
+  cursor: pointer;
+  text-shadow:0px 1px 0px #ecebe9;
   text-transform: lowercase;
+  color: #f05023;
+  font-size: 1.75vw;
+  line-height: 30px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  width: 25%;
+}
+
+
+#shared-links-wrapper {
+  text-transform: lowercase;
+  margin-bottom: 10%;
 }
 
 #shared-links-wrapper a {
-  color: #f05023;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  display: table-cell;
+  /*position*/
+  margin: 0 auto;
+  display: block;
+  width: 25%;
+  text-align: center;
+
+  /*button things*/
+  padding:6px 3px;
   border: 4px outset;
-  padding: 2px;
   text-decoration: none;
   -moz-border-radius:28px;
   -webkit-border-radius:28px;
   border-radius:28px;
-  cursor:pointer;
-  font-size: 2vw;
-  padding:6px 3px;
-  text-shadow:0px 1px 0px #2f6627;
+  cursor: pointer;
+  text-shadow:0px 1px 0px #ecebe9;
   text-transform: lowercase;
+
+  /*text*/
+  color: #f05023;
+  font-size: 1.75vw;
+  line-height: 30px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
 }
 
 input[type="submit"]{
-  background-color: white;
-  -moz-border-radius:28px;
-  -webkit-border-radius:28px;
-  border-radius:28px;
-  display:inline-block;
-  cursor:pointer;
   color: #f05023;
-  font-size: 2vw;
-  padding:6px 3px;
-  text-decoration:none;
-  text-shadow:0px 1px 0px #2f6627;
+  font-size: 1.75vw;
+  line-height: 30px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  
+  width: 25%;
+  font-family: Merriweather;
+  border: 4px outset;
+  background-color: white;
+  -moz-border-radius: 28px;
+  -webkit-border-radius: 28px;
+  border-radius: 28px;
+  display: inline-block;
+  cursor: pointer;
+  padding: 6px 3px;
+  text-shadow: 0px 1px 0px #ecebe9;
   text-transform: lowercase;
 }
+
+#shared-links-wrapper a:hover,
 input[type="submit"]:hover {
-  background-color: #ecebe9;
+  color: #632600;
 }
 input[type="submit"]:active {
   position:relative;
