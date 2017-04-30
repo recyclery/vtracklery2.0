@@ -3,39 +3,48 @@
 html{
   position:relative;
   min-height: 100%;
-  max-width: 100%;
+  width: auto;
 }
 
 body{
-  text-align: left;
   font-family: Merriweather;
   margin: 0 auto;
-  left: 0;
-  right: 0;
+  /*left: 0;*/
+  /*right: 0;*/
+  color: #632600;
+}
+
+h1, h2, h3, h4 {
+  text-align: center;
+  color: #f05023;
 }
 
 nav {
+  position: relative;
   background-color: #632600 !important;
   height: 20%;
   padding: 2%;
+  color: #ffffff;
 }
 
 nav a {
   text-decoration: none;
+  color: #ffffff;
 }
 
-.navbar-header a:hover{
-  color: #632600
+nav a:hover {
+  color: #f05023;
 }
 
 .navbar-brand {
-  color: white !important;
+  clear: both;
   letter-spacing: 0.3em;
   color: #ffffff;
   font-weight: 400;
   font-size: 36px;
   width: 30%;
   padding-left: 5%;
+  text-align: left;
 }
 
 nav ul {
@@ -50,18 +59,10 @@ nav ul li {
   letter-spacing: 0.1em;
 }
 
-.navbar-default .navbar-nav>li>a {
-  color: #f05023;
-}
-
-.page-content{
-  margin: 0 auto;
-  width: 90%;
-}
-
 footer {
   background-color: #632600 !important;
-  padding: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
   color: #ffffff;
   letter-spacing: 0.05em;
   height: .25vh;
